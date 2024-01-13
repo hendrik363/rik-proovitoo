@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hendrikm.models.EventModel;
-import com.hendrikm.services.AddEventService;
+import com.hendrikm.services.GetEventsService;
 
 @Controller
 @RequestMapping("/lisa-yritus")
 public class AddEventController {
 
-    AddEventService addEventService;
+    GetEventsService getEventsService;
 
-    public AddEventController(AddEventService addEventService) {
+    public AddEventController(GetEventsService getEventsService) {
         super();
-        this.addEventService = addEventService;
+        this.getEventsService = getEventsService;
     }
 
     @GetMapping
@@ -35,8 +35,8 @@ public class AddEventController {
         model.addAttribute("location", event.getLocation());
         model.addAttribute("information", event.getInformation());
 
-        System.out.println("Test name " + event.getName());
-        return "avaleht";
+        System.out.println("Test name " + model);
+        return "lisaosaleja";
     }
 
 }
