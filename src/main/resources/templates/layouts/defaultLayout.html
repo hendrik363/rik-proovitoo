@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" decorate="layouts/defaultTemplate">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lisa üritus</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<style>
+    body {
+        background-color: #eef2f5;
+        /* Set background color to a light color */
+        height: 100vh;
+        margin-top: 50px;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Helvetica', sans-serif;
+    }
+
+    .footer {
+        background-color: #373737;
+        /* Set footer background color to dark grey */
+        color: #ffffff;
+        /* Set text color to white */
+        width: 100%;
+        /* Prevent footer from shrinking */
+    }
+
+    .footer a {
+        color: #848484;
+        /* Set link color to white */
+        text-decoration: none;
+        /* Remove underline */
+    }
+
+    .footer a:hover {
+        text-decoration: underline;
+        color: #ffffff;
+        /* Add underline on hover if desired */
+    }
+
+    .navbar {
+        background-color: #ffffff;
+        /* Set header background color to white */
+        padding: 15px 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        /* Optional: Add a subtle box-shadow for depth */
+    }
+
+    .navbar-brand img {
+        max-height: 40px;
+        /* Adjust the maximum height of the logo */
+    }
+
+    .navbar-nav {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .navbar-nav a {
+        margin: 0 15px;
+        color: #333;
+        /* Set link color to a dark color */
+        text-decoration: none;
+        /* Remove underline */
+    }
+
+    .navbar-nav a:hover {
+        color: #ffffff;
+        background-color: #005aa1;
+        /* Change link color on hover if desired */
+    }
+    .button-color {
+        background-color: #005aa1;
+        color: #ffffff;
+    }
+
+    .button-color button:hover {
+        background-color: #e2e2e2;
+    }
+</style>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+                <!-- header -->
+                <div th:replace="~{layouts/commonHeader :: header}"></div>
+
+                <!-- content -->
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                        <section layout:fragment="content"></section>
+                    </div>
+                </div>
+
+                <!-- footer -->
+                <div th:replace="~{layouts/commonFooter :: footer}"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
