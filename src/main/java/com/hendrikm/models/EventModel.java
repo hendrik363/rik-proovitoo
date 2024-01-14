@@ -1,11 +1,14 @@
 package com.hendrikm.models;
 
+import java.sql.Date;
+import java.sql.Time;
+
 public class EventModel {
 
     private int id;
     private String name;
-    private String date;
-    private String time;
+    private Date date;
+    private Time time;
     private String location;
     private String information;
 
@@ -19,7 +22,7 @@ public class EventModel {
         super();
     }
 
-    public EventModel(int id, String name, String date, String time, String location, String information) {
+    public EventModel(int id, String name, Date date, Time time, String location, String information) {
         this.id = id;
         this.name = name;
         this.date = date;
@@ -44,19 +47,19 @@ public class EventModel {
         this.name = name;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    public String getTime() {
+    public Time getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(Time time) {
         this.time = time;
     }
 

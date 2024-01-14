@@ -14,11 +14,6 @@ public class EventsFakeDAO implements EventsDataAccessInterface {
 
     public EventsFakeDAO() {
         super();
-        events.add(new EventModel(1, "01", "01", "01", "01", "01"));
-        events.add(new EventModel(2, "02", "02", "02", "02", "02"));
-        events.add(new EventModel(3, "03", "03", "03", "03", "03"));
-        events.add(new EventModel(4, "04", "04", "04", "04", "04"));
-        events.add(new EventModel(5, "05", "05", "05", "05", "05"));
     }
 
     @Override
