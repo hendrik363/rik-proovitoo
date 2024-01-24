@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" layout:decorate="layouts/defaultLayout">
+<html lang="en" layout:decorate="layouts/defaultLayout" xmlns:th="https://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -12,53 +12,55 @@
 </head>
 
 <body>
-
-    <div class="container my-5" layout:fragment="content">
-        <div class="row">
-            <div class="col">
-                <div class="col-sm-4 col-form-label">
+    <div class="container my-3" layout:fragment="content">
+        <div class="row bg-light g-0">
+            <div class="row g-0 mb-3 banner h-50">
+                <div class="col-md-3 blue-bg text-white d-flex align-items-center justify-content-center" style="height: 100px;">
+                    <h2>Ürituse lisamine</h2>
+                </div>
+                <div class="col-md-9">
+                    <img src="/libled.jpg" alt="Image" class="object-cover" style="height: 100px;">
+                </div>
+            </div>
+            <div class="row col-md-8 offset-md-3">
+                <div class="col-sm-4 col-form-label form-header-color">
                     <h4>Ürituse lisamine</h4>
                 </div>
-                <form action="/lisa-yritus" method="post">
+                <form action="#" method="post" th:action="@{/lisa-yritus}" th:object="${event}">
                     <div class="row mb-3">
                         <label for="eventName" class="col-sm-3 col-form-label">Ürituse nimi:</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="eventName" name="name" required>
+                            <input th:field="*{eventName}" type="text" class="form-control" id="eventName" required>
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <label for="eventDate" class="col-sm-3 col-form-label">Ürituse kuupäev:</label>
                         <div class="col-sm-6">
-                            <input type="date" class="form-control" id="eventDate" name="date" required>
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label for="eventTime" class="col-sm-3 col-form-label">Ürituse Aeg:</label>
-                        <div class="col-sm-6">
-                            <input type="time" class="form-control" id="eventTime" name="time" required>
+                            <input th:field="*{dateTime}" type="datetime-local" class="form-control" id="eventDate" name="date"
+                                required>
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <label for="eventLocation" class="col-sm-3 col-form-label">Ürituse asukoht:</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="eventLocation" name="location" required>
+                            <input th:field="*{location}" type="text" class="form-control" id="eventLocation"
+                                name="location" required>
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <label for="eventDescription" class="col-sm-3 col-form-label">Lisa info:</label>
                         <div class="col-sm-6">
-                            <textarea class="form-control" id="eventDescription" name="description" rows="4"
-                                required></textarea>
+                            <textarea th:field="*{information}" class="form-control" id="eventDescription"
+                                name="description" rows="4" required></textarea>
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col-sm-10 offset-sm-3">
-                            <button class="btn btn-light">Tagasi</button>
+                            <a href="/" class="btn btn-light">Tagasi</a>
                             <button type="submit" class="btn button-color">Lisa üritus</button>
                         </div>
                     </div>
@@ -66,6 +68,7 @@
             </div>
         </div>
     </div>
+
 
 </body>
 

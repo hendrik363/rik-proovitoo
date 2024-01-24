@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.hendrikm.models.EventModel;
 
 @Repository
-public class EventsFakeDAO implements EventsDataAccessInterface {
+public class EventsFakeDAO implements EventsDataAccessInterface<EventModel> {
 
     List<EventModel> events = new ArrayList<EventModel>();
 
@@ -17,7 +17,7 @@ public class EventsFakeDAO implements EventsDataAccessInterface {
     }
 
     @Override
-    public EventModel getById(int id) {
+    public EventModel getById(Long id) {
         for(int i=0; i<events.size(); i++) {
             if(events.get(i).getId() == id) {
                 return events.get(i);
@@ -33,7 +33,7 @@ public class EventsFakeDAO implements EventsDataAccessInterface {
     }
 
     @Override
-    public int addOne(EventModel newEvent) {
+    public long addOne(EventModel newEvent) {
         boolean success = events.add(newEvent);
 
         if(success) {
@@ -47,7 +47,7 @@ public class EventsFakeDAO implements EventsDataAccessInterface {
     }
 
     @Override
-    public boolean deleteOne(int id) {
+    public boolean deleteOne(Long id) {
         for(int i=0; i<events.size(); i++) {
             if(events.get(i).getId() == id) {
                 events.remove(i);
@@ -59,7 +59,7 @@ public class EventsFakeDAO implements EventsDataAccessInterface {
     }
 
     @Override
-    public EventModel updateEvent(int idToUpdate, EventModel updateEvent) {
+    public EventModel updateEvent(long idToUpdate, EventModel updateEvent) {
         for(int i=0; i<events.size(); i++) {
             if(events.get(i).getId() == idToUpdate) {
                 events.set(i, updateEvent);
@@ -69,5 +69,6 @@ public class EventsFakeDAO implements EventsDataAccessInterface {
 
         return null;
     }
+
     
 }

@@ -13,7 +13,7 @@ import com.hendrikm.models.EventModel;
 public class GetEventsService implements EventsServiceInterface {
 
     @Autowired
-    EventsDataAccessInterface eventsDAO;
+    EventsDataAccessInterface<EventModel> eventsDAO;
 
     @Override
     public void test() {
@@ -37,22 +37,22 @@ public class GetEventsService implements EventsServiceInterface {
     }
 
     @Override
-    public EventModel getById(int id) {
+    public EventModel getById(long id) {
         return eventsDAO.getById(id);
     }
 
     @Override
-    public int addOne(EventModel newEvent) {
+    public long addOne(EventModel newEvent) {
         return eventsDAO.addOne(newEvent);
     }
 
     @Override
-    public boolean deleteOne(int id) {
+    public boolean deleteOne(long id) {
         return eventsDAO.deleteOne(id);
     }
 
     @Override
-    public EventModel updateEvent(int id, EventModel updateEvent) {
+    public EventModel updateEvent(long id, EventModel updateEvent) {
         return eventsDAO.updateEvent(id, updateEvent);
     }
 

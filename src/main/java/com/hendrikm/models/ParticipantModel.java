@@ -1,47 +1,35 @@
 package com.hendrikm.models;
 
+import java.util.UUID;
+
 public class ParticipantModel {
-    private int id;
-    private String name;
+
+    private UUID id;
+    private String participantType;
+    private String firstName;
+    private String lastName;
     private String personalCode;
     private String paymentMethod;
     private String information;
-
-    @Override
-    public String toString() {
-        return "ParticipantModel [id=" + id + ", name=" + name + ", personalCode=" + personalCode
-                + ", paymentMethod=" + paymentMethod + ", information=" + information + "]";
-    }
 
     public ParticipantModel() {
         super();
     }
 
-    public ParticipantModel(int id, String name, String date, String personalCode, String paymentMethod, String information) {
-        super();
-        this.id = id;
-        this.name = name;
+    public ParticipantModel(String firstName, String participantType, String lastName, String personalCode, String paymentMethod,
+            String information) {
+        this.id = UUID.randomUUID();
+        this.participantType = participantType;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.personalCode = personalCode;
         this.paymentMethod = paymentMethod;
         this.information = information;
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
 
     public String getPersonalCode() {
         return personalCode;
@@ -65,6 +53,38 @@ public class ParticipantModel {
 
     public void setInformation(String information) {
         this.information = information;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    @Override
+    public String toString() {
+        return "ParticipantModel [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", personalCode="
+                + personalCode + ", paymentMethod=" + paymentMethod + ", information=" + information + "]";
+    }
+
+
+
+    public String getParticipantType() {
+        return participantType;
+    }
+
+    public void setParticipantType(String participantType) {
+        this.participantType = participantType;
     }
 
 }

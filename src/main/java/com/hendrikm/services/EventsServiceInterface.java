@@ -11,10 +11,10 @@ public interface EventsServiceInterface {
 
     public void destroy();
 
-    public EventModel getById(int id);
+    public EventModel getById(long id);
     public List<EventModel> getEvents();
-    public int addOne(EventModel newEvent);
-    public boolean deleteOne(int id);
-    public EventModel updateEvent(int id, EventModel updateEvent);
+    public long addOne(EventModel newEvent);
+    public boolean deleteOne(long id);
+    public EventModel updateEvent(long id, EventModel updateEvent);
 
 }

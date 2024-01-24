@@ -2,7 +2,6 @@ package com.hendrikm.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +20,6 @@ public class EventsRestController {
 
     EventsServiceInterface service;
 
-    @Autowired
     public EventsRestController(EventsServiceInterface service) {
         super();
         this.service = service;
@@ -35,23 +33,23 @@ public class EventsRestController {
     } 
     
     @PostMapping
-    public int addEvent(EventModel model) {
+    public long addEvent(@RequestBody EventModel model) {
         
         return service.addOne(model); 
     } 
 
     @GetMapping("/{id}")
-    public EventModel getById(@PathVariable(name="id") int id){
+    public EventModel getById(@PathVariable(name="id") long id){
         return service.getById(id);
     }
 
     @GetMapping("/delete/{id}")
-    public boolean deleteEvent(@PathVariable(name="id") int id){
+    public boolean deleteEvent(@PathVariable(name="id") long id){
         return service.deleteOne(id);
     }
 
     @PutMapping("/update/{id}")
-    public EventModel updateEvent(@RequestBody EventModel model, @PathVariable(name="id") int id){
+    public EventModel updateEvent(@RequestBody EventModel model, @PathVariable(name="id") long id){
         return service.updateEvent(id, model);
     }
 }

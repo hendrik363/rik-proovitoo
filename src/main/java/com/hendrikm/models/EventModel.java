@@ -1,66 +1,53 @@
 package com.hendrikm.models;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EventModel {
 
-    private int id;
-    private String name;
-    private Date date;
-    private Time time;
+    private Long id;
+    private String eventName;
+    private String dateTime;
     private String location;
     private String information;
+    private List<ParticipantModel> participants;
 
     @Override
     public String toString() {
-        return "Event [id=" + id + ", name=" + name + ", date=" + date + ", time=" + time + ", location=" + location
-                + ", information=" + information + "]";
+        return "Event [id=" + id + ", eventName=" + eventName + ", date=" + dateTime + ", dateTime=" + location
+                + ", information=" + information + ", participants=" + participants + "]";
     }
 
     public EventModel() {
         super();
     }
 
-    public EventModel(int id, String name, Date date, Time time, String location, String information) {
+    public EventModel(Long id, String eventName, String dateTime, String location, String information,
+            List<ParticipantModel> participants) {
         this.id = id;
-        this.name = name;
-        this.date = date;
-        this.time = time;
+        this.eventName = eventName;
+        this.dateTime = dateTime;
         this.location = location;
         this.information = information;
+        this.participants = participants;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getEventName() {
+        return eventName;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Time getTime() {
-        return time;
-    }
-
-    public void setTime(Time time) {
-        this.time = time;
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
 
     public String getLocation() {
@@ -77,6 +64,31 @@ public class EventModel {
 
     public void setInformation(String information) {
         this.information = information;
+    }
+
+    public List<ParticipantModel> getParticipants() {
+        if (participants == null) {
+            return new ArrayList<ParticipantModel>();
+        } else
+            return participants;
+    }
+
+    public void setParticipants(List<ParticipantModel> participants) {
+        this.participants = participants;
+    }
+
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public String getFormattedDateTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime localDateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ISO_DATE_TIME);
+        return localDateTime.format(formatter);
     }
 
 }
