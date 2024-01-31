@@ -37,13 +37,13 @@
                     <ol>
                         <li th:each="comingEvent : ${comingEvents}" class="list-group-item px-4">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <p th:text="${comingEvent.eventName}"></p>
                                 </div>
                                 <div class="col-md-4">
                                     <p th:text="${comingEvent.formattedDateTime}"></p>
                                 </div>
-                                <div class="col-md-3 event-box d-flex justify-content-between">
+                                <div class="col-md-2 event-box d-flex justify-content-between">
                                     <a th:href="@{/lisa-osavotjad/{event_id}(event_id=${comingEvent.id})}">
                                         OSAVÕTJAD
                                     </a>
@@ -67,7 +67,7 @@
                 </div>
                 <div class="py-3 bg-light" style="min-height: 300px;">
                     <ol>
-                        <li th:each="passedEvent : ${passedEvents}" class="list-group-item px-4">
+                        <li th:each="passedEvent : ${passedEvents}" class="list-group-item px-3">
                             <div class="row">
                                 <div class="col-md-5">
                                     <p th:text="${passedEvent.eventName}"></p>
