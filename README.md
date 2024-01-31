@@ -32,7 +32,7 @@ Veebirakendus peab koosnema järgmistest vaadetest:
 - Üritusest osavõtvate isikute vaate disainisin tänu pildile, mille leidsin "UI Materjal" kaustast.
 
 · Osavõtja lisamise vaade
-- Osavõtja lisamise vaade on osa Üritusest osavõtvate isikute vaate lehest. Nii nagu "UI Materjal" kaustas oleval pildil. Lehel on kaks radio buttonit Eraisik ja Ettevõte. Valides ühe neist muutub all olev Form järgnevalt Ettevõte ja Eraisiku andmetele.
+- Osavõtja lisamise vaade on osa Üritusest osavõtvate isikute vaate lehest. Nii nagu "UI Materjal" kaustas oleval pildil. Lehel on kaks radio buttonit Eraisik ja Ettevõte. Valides ühe neist muutub all olev Form järgnevalt Ettevõte ja Eraisiku andmetele. Kuna nägin, et osavõtjaid saab lisada ainult ürituste külge, siis disainisin lehe nii, et osavõtjaid saab lisada ainult ürituse külge. Kui peab olema võimalik lisada osalejaid eraldi, siis palun andke teada.
 
 · Osavõtja detailandmete vaatamise/muutmise vaade
 - Tegin kaks eraldi lehte osavõtja detailandmete vaatamise/muutmise vaate jaoks. Lehe form oleneb sellest, kas osaleja on Ettevõte või Eraisik:
@@ -64,6 +64,20 @@ Ettevõtte juriidiline nimi
 · Lisainfo väli (maksimaalselt 5000 tähemärki), osalejapoolsed soovid
 
 #### Lisainfo: Kasutasin Thymeleaf'i, et siduda frontend ja backend andmeid. 
+
+## Andmebaas
+
+Mysql andmebaasi seadistasin kastades rakendust MAMP. Seadistasin, ainult ühe tabeli ürituste jaoks. Üritus koosneb järgnevatest väljadest: 
+- ID 
+- NAME (Nimi) (Andmetüüp TEXT)
+- DATETIME (ürituse aeg) (Andmetüüp TEXT)
+- LOCATION (Asukoht) (Andmetüüp TEXT)
+- INFROMATION (ürituse lisainfo) (Andmetüüp TEXT)
+- PARTICIPANTS (Eraisikust osavõtjad) (Andmetüüp JSON)
+- COMPANY_PARTICIPANTS (Ettevõte osavõtjad) (Andmetüüp JSON)
+- ALL_PARTICIPANTS (Kõik osavõtjad) (Andmetüüp JSON)
+
+#### Leiate pildi andmebaasi struktuurist projekti failide hulgast: andmebaas.jpg
 
 
 
