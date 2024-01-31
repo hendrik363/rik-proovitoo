@@ -1,5 +1,15 @@
 # java programmeerija prooviülesanne
 
+## Rakenduse jooksutamise käsurea käsud
+### Compile
+& "<mvnw.cmd path>" compile -f "<pom.xml path>"
+
+### Package
+& "<mvnw.cmd path>" package -f "<pom.xml path>"
+
+### Run
+java -jar ./target/rik-proovitoo.jar
+
 ## Prooviülesande nõuded
 
 ### Mittefunktsionaalsed nõuded
