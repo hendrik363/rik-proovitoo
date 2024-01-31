@@ -13,7 +13,7 @@
 - Katsetasin kompileerumist ja avamist IDEA's ning mul toimis ilma vigadeta.
 
 · Kasutajaliides peab vastama HTML5 standardile ning kasutajaliidese loomisel on soovitatav võtta aluseks mõni raamistik (näiteks Bootstrap).
-- Disainisin veebirakenduse kasutades HTML'i ja Bootstrapi. Vajalikudes kohtades kirjutasin oma css'i. Kasutasin ainult ühes kohas javascripti, nimelt Osavõtja lisamise vaates, sest tahtsin, et form muutuks realajas olenevalt, kas kasutaja on valinud Ettevõte või Eraisik.
+- Disainisin veebirakenduse kasutades HTML'i ja Bootstrapi. Vajalikudes kohtades kirjutasin oma css'i. Kasutasin javascripti, nimelt Osavõtja lisamise vaates, sest tahtsin, et form muutuks realajas olenevalt, kas kasutaja on valinud Ettevõte või Eraisik.
 
 · Kasuta töös avalikult kättesaadavat Git repositooriumi (näiteks üks kolmest kõige levinumast: GitHub, GitLab või Bitbucket). Töö käik peab olema hindaja poolt versioonihaldusest selgelt jälgitav.
 - Praegune GitHub repositoorium on avalikult kättesaadav.
@@ -26,7 +26,7 @@ Veebirakendus peab koosnema järgmistest vaadetest:
 - Avalehe disainisin tänu pildile, mille leidsin "UI Materjal" kaustast.
 
 · Ürituse lisamise vaade
-- Ürituse lisamise vaate disainisin tänu pildile, mille leidsin "UI Materjal" kaustast.
+- Ürituse lisamise vaate disainisin tänu pildile, mille leidsin "UI Materjal" kaustast. Javascriptiga kontrollin, et kuupäev oleks tulevikus.
 
 · Üritusest osavõtvate isikute vaade
 - Üritusest osavõtvate isikute vaate disainisin tänu pildile, mille leidsin "UI Materjal" kaustast.
