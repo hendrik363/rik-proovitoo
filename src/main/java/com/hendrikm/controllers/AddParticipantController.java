@@ -1,5 +1,6 @@
 package com.hendrikm.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hendrikm.models.CompanyModel;
 import com.hendrikm.models.EventModel;
 import com.hendrikm.models.ParticipantModel;
 import com.hendrikm.services.EventsServiceInterface;
@@ -33,12 +35,12 @@ public class AddParticipantController {
 
         ParticipantModel newParticipant = new ParticipantModel();
         EventModel event = service.getById(event_id);
-
-        System.out.println("participants" + event.getParticipants());
-        newParticipant.setParticipantType("Eraisik");
+        CompanyModel newCompany = new CompanyModel();
+        List<Object> participants = event.getAllParticipants();
 
         model.addAttribute("newParticipant", newParticipant);
-        model.addAttribute("participants", event.getParticipants());
+        model.addAttribute("newCompany", newCompany);
+        model.addAttribute("participants", participants);
         model.addAttribute("event", event);
 
         return "lisaosaleja";
@@ -60,32 +62,86 @@ public class AddParticipantController {
 
     }
 
-    @PostMapping("/{event_id}")
+    public boolean isRegisterCodeUnique(String registerCode, EventModel event) {
+
+        List<CompanyModel> participants = event.getCompanyParticipants();
+
+        boolean isTaken = participants.stream()
+                .anyMatch(participant -> Objects.equals(participant.getRegisterCode(), registerCode));
+
+        if (isTaken) {
+            return true;
+        } else
+            return false;
+
+    }
+
+    @PostMapping("/eraisik/{event_id}")
     public String addParticipants(@PathVariable Long event_id, ParticipantModel newParticipant,
             BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
 
         EventModel event = service.getById(event_id);
 
         if (isPersonalCodeUnique(newParticipant.getPersonalCode(), event)) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Personal code is already taken.");
+            redirectAttributes.addFlashAttribute("errorMessage", "Isikukood on juba võetud.");
             return "redirect:/lisa-osavotjad/" + event_id;
         }
 
         List<ParticipantModel> participants = event.getParticipants();
 
-        newParticipant = new ParticipantModel(newParticipant.getFirstName(), newParticipant.getParticipantType(),
+        newParticipant = new ParticipantModel(newParticipant.getFirstName(),
                 newParticipant.getLastName(), newParticipant.getPersonalCode(), newParticipant.getPaymentMethod(),
                 newParticipant.getInformation());
-
-        System.out.println("new Participant generated id" + newParticipant);
 
         participants.add(newParticipant);
 
         event.setParticipants(participants);
 
+        List<Object> allParticipants = new ArrayList<>();
+
+        allParticipants.addAll(participants);
+        allParticipants.addAll(event.getCompanyParticipants());
+
+        event.setAllParticipants(allParticipants);
+
         service.updateEvent(event_id, event);
         redirectAttributes.addFlashAttribute("successMessage", "Osaleja lisatud");
-        System.out.println("updated event participants " + event.getParticipants());
+        // event.getAllParticipants());
+
+        return "redirect:/lisa-osavotjad/" + event_id;
+    }
+
+    @PostMapping("/ettevote/{event_id}")
+    public String addCompanyParticipants(@PathVariable Long event_id, CompanyModel newCompany,
+            BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+
+        EventModel event = service.getById(event_id);
+
+        if (isRegisterCodeUnique(newCompany.getRegisterCode(), event)) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Registri kood on juba võetud.");
+            return "redirect:/lisa-osavotjad/" + event_id;
+        }
+
+        List<CompanyModel> companyParticipants = event.getCompanyParticipants();
+
+        newCompany = new CompanyModel(newCompany.getCompanyName(),
+                newCompany.getRegisterCode(), newCompany.getCompanyParticipants(), newCompany.getPaymentMethod(),
+                newCompany.getInformation());
+
+        companyParticipants.add(newCompany);
+
+        event.setCompanyParticipants(companyParticipants);
+
+        List<Object> allParticipants = new ArrayList<>();
+
+        allParticipants.addAll(companyParticipants);
+        allParticipants.addAll(event.getParticipants());
+
+        event.setAllParticipants(allParticipants);
+
+        service.updateEvent(event_id, event);
+        redirectAttributes.addFlashAttribute("successMessage", "Ettevõte lisatud");
+        // event.getAllParticipants());
 
         return "redirect:/lisa-osavotjad/" + event_id;
     }
@@ -93,12 +149,25 @@ public class AddParticipantController {
     @GetMapping("/{event_id}/eemalda_osaleja/{participant_id}")
     public String deleteParticipant(@PathVariable Long event_id, @PathVariable UUID participant_id, Model model) {
         EventModel event = service.getById(event_id);
-        List<ParticipantModel> updatedParticipants = event.getParticipants()
-                .stream()
-                .filter(p -> !p.getId().equals(participant_id))
+        List<ParticipantModel> participants = event.getParticipants();
+        List<CompanyModel> companyParticipants = event.getCompanyParticipants();
+        List<Object> allParticipants = new ArrayList<>();
+
+        participants = participants.stream()
+                .filter(participant -> !participant.getId().equals(participant_id))
                 .collect(Collectors.toList());
 
-        event.setParticipants(updatedParticipants);
+        companyParticipants = companyParticipants.stream()
+                .filter(participant -> !participant.getId().equals(participant_id))
+                .collect(Collectors.toList());
+        
+        allParticipants.addAll(participants);
+        allParticipants.addAll(companyParticipants);
+
+        System.out.println("ALLPARTICIPANTS " + allParticipants);
+        event.setParticipants(participants);
+        event.setCompanyParticipants(companyParticipants);
+        event.setAllParticipants(allParticipants);
         service.updateEvent(event_id, event);
 
         return "redirect:/lisa-osavotjad/" + event_id;

@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,12 +19,12 @@ import com.hendrikm.models.ParticipantModel;
 import com.hendrikm.services.EventsServiceInterface;
 
 @Controller
-@RequestMapping("/lisa-osavotja-info/{event_id}/{participant_id}")
-public class AddParticipantInfoController {
+@RequestMapping("/lisa-ettevote-info/{event_id}/{participant_id}")
+public class AddCompanyParticipantInfoController {
 
     EventsServiceInterface service;
 
-    public AddParticipantInfoController(EventsServiceInterface service) {
+    public AddCompanyParticipantInfoController(EventsServiceInterface service) {
         super();
         this.service = service;
     }
@@ -34,9 +33,9 @@ public class AddParticipantInfoController {
     public String displayChangeParticipantInfo(@PathVariable Long event_id,@PathVariable UUID participant_id, Model model) {
 
         EventModel event = service.getById(event_id);
-        ParticipantModel participant = null;
-        List<ParticipantModel> participants = event.getParticipants();
-        Optional<ParticipantModel> optionalParticipant = participants.stream().filter(p -> p.getId().equals(participant_id)).findFirst();
+        CompanyModel participant = null;
+        List<CompanyModel> participants = event.getCompanyParticipants();
+        Optional<CompanyModel> optionalParticipant = participants.stream().filter(p -> p.getId().equals(participant_id)).findFirst();
 
         if(optionalParticipant.isPresent()) {
             participant = optionalParticipant.get();
@@ -48,31 +47,33 @@ public class AddParticipantInfoController {
         model.addAttribute("event", event);
         model.addAttribute("participant", participant);
 
-        return "lisaosavotjainfo";
+        System.out.println("EVENTID" + event_id);
+
+        return "lisaettevoteinfo";
     }
 
     @PostMapping
-    public String changeParticipantInfo(@PathVariable Long event_id,@PathVariable UUID participant_id, ParticipantModel updateParticipant, BindingResult bindingResult, Model model) {
+    public String changeParticipantInfo(@PathVariable Long event_id,@PathVariable UUID participant_id, CompanyModel updateParticipant, BindingResult bindingResult, Model model) {
 
         EventModel event = service.getById(event_id);
         List<Object> allParticipants = new ArrayList<>();
 
-        updateParticipant.setFirstName(updateParticipant.getFirstName());
-        updateParticipant.setLastName(updateParticipant.getLastName());
-        updateParticipant.setPersonalCode(updateParticipant.getPersonalCode());
+        updateParticipant.setCompanyName(updateParticipant.getCompanyName());
+        updateParticipant.setRegisterCode(updateParticipant.getRegisterCode());
+        updateParticipant.setCompanyParticipants(updateParticipant.getCompanyParticipants());
         updateParticipant.setPaymentMethod(updateParticipant.getPaymentMethod());
         updateParticipant.setInformation(updateParticipant.getInformation());
 
-        event.getParticipants().stream().filter(p -> p.getId().equals(participant_id)).findFirst().ifPresent(par -> {
-            par.setFirstName(updateParticipant.getFirstName());
-            par.setLastName(updateParticipant.getLastName());
-            par.setPersonalCode(updateParticipant.getPersonalCode());
+        event.getCompanyParticipants().stream().filter(p -> p.getId().equals(participant_id)).findFirst().ifPresent(par -> {
+            par.setCompanyName(updateParticipant.getCompanyName());
+            par.setRegisterCode(updateParticipant.getRegisterCode());
+            par.setCompanyParticipants(updateParticipant.getCompanyParticipants());
             par.setPaymentMethod(updateParticipant.getPaymentMethod());
             par.setInformation(updateParticipant.getInformation());
         });
 
-        allParticipants.addAll(event.getCompanyParticipants());
         allParticipants.addAll(event.getParticipants());
+        allParticipants.addAll(event.getCompanyParticipants());
 
         event.setAllParticipants(allParticipants);
         

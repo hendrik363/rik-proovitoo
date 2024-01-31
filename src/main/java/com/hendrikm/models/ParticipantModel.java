@@ -5,7 +5,7 @@ import java.util.UUID;
 public class ParticipantModel {
 
     private UUID id;
-    private String participantType;
+    private String participantType = "Eraisik";
     private String firstName;
     private String lastName;
     private String personalCode;
@@ -16,10 +16,9 @@ public class ParticipantModel {
         super();
     }
 
-    public ParticipantModel(String firstName, String participantType, String lastName, String personalCode, String paymentMethod,
+    public ParticipantModel(String firstName, String lastName, String personalCode, String paymentMethod,
             String information) {
         this.id = UUID.randomUUID();
-        this.participantType = participantType;
         this.firstName = firstName;
         this.lastName = lastName;
         this.personalCode = personalCode;

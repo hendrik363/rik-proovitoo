@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hendrikm.models.CompanyModel;
 import com.hendrikm.models.EventModel;
 import com.hendrikm.models.EventsMapper;
 import com.hendrikm.models.ParticipantModel;
@@ -60,7 +61,9 @@ public class EventsDataService implements EventsDataAccessInterface<EventModel> 
         paramtetrs.put("DATETIME", newEvent.getDateTime());
         paramtetrs.put("LOCATION", newEvent.getLocation());
         paramtetrs.put("INFORMATION", newEvent.getInformation());
-        paramtetrs.put("EVENT_PARTICIPANTS", emptyArray);
+        paramtetrs.put("PARTICIPANTS", emptyArray);
+        paramtetrs.put("COMPANY_PARTICIPANTS", emptyArray);
+        paramtetrs.put("ALL_PARTICIPANTS", emptyArray);
 
         Number result = simpleInsert.executeAndReturnKey(paramtetrs);
 
@@ -83,22 +86,22 @@ public class EventsDataService implements EventsDataAccessInterface<EventModel> 
     public EventModel updateEvent(long idToUpdate, EventModel updateEvent) {
         ObjectMapper objectMapper = new ObjectMapper();
         List<ParticipantModel> participants = updateEvent.getParticipants();
+        List<CompanyModel> companyParticipants = updateEvent.getCompanyParticipants();
+        List<Object> allParticipants = updateEvent.getAllParticipants();
 
         String jsonParticipants = null;
+        String jsonCompanyParticipants = null;
+        String jsonAllParticipants = null;
 
         try {
-            // Convert List to JSON string
             jsonParticipants = objectMapper.writeValueAsString(participants);
-
-            // Print the JSON string
-            System.out.println("jsonParticipants" + jsonParticipants);
+            jsonCompanyParticipants = objectMapper.writeValueAsString(companyParticipants);
+            jsonAllParticipants = objectMapper.writeValueAsString(allParticipants);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
 
-        System.out.println("jsonParticipants outside try" + jsonParticipants);
-
-        long result = jdbcTemplate.update("UPDATE EVENTS SET NAME = ?, DATETIME = ?, LOCATION = ?, INFORMATION = ?, EVENT_PARTICIPANTS = ? WHERE ID = ?", updateEvent.getEventName(), updateEvent.getDateTime(), updateEvent.getLocation(), updateEvent.getInformation(), jsonParticipants, idToUpdate);
+        long result = jdbcTemplate.update("UPDATE EVENTS SET NAME = ?, DATETIME = ?, LOCATION = ?, INFORMATION = ?, PARTICIPANTS = ?, COMPANY_PARTICIPANTS = ?, ALL_PARTICIPANTS = ? WHERE ID = ?", updateEvent.getEventName(), updateEvent.getDateTime(), updateEvent.getLocation(), updateEvent.getInformation(), jsonParticipants, jsonCompanyParticipants, jsonAllParticipants, idToUpdate);
 
         if(result > 0) {
             return updateEvent;

@@ -12,26 +12,24 @@ public class EventModel {
     private String dateTime;
     private String location;
     private String information;
+    private List<Object> allParticipants;
     private List<ParticipantModel> participants;
-
-    @Override
-    public String toString() {
-        return "Event [id=" + id + ", eventName=" + eventName + ", date=" + dateTime + ", dateTime=" + location
-                + ", information=" + information + ", participants=" + participants + "]";
-    }
+    private List<CompanyModel> companyParticipants;
 
     public EventModel() {
         super();
     }
 
-    public EventModel(Long id, String eventName, String dateTime, String location, String information,
-            List<ParticipantModel> participants) {
+    public EventModel(Long id, String eventName, String dateTime, String location, String information, List<ParticipantModel> participants, List<CompanyModel> companyParticipants,
+            List<Object> allParticipants) {
         this.id = id;
         this.eventName = eventName;
         this.dateTime = dateTime;
         this.location = location;
         this.information = information;
         this.participants = participants;
+        this.companyParticipants = companyParticipants;
+        this.allParticipants = allParticipants;
     }
 
     public Long getId() {
@@ -89,6 +87,32 @@ public class EventModel {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime localDateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ISO_DATE_TIME);
         return localDateTime.format(formatter);
+    }
+
+    public List<CompanyModel> getCompanyParticipants() {
+        if (companyParticipants == null) {
+            return new ArrayList<CompanyModel>();
+        } else
+            return companyParticipants;
+    }
+
+    public void setCompanyParticipants(List<CompanyModel> companyParticipants) {
+        this.companyParticipants = companyParticipants;
+    }
+
+    @Override
+    public String toString() {
+        return "EventModel [id=" + id + ", eventName=" + eventName + ", dateTime=" + dateTime + ", location=" + location
+                + ", information=" + information + ", participants=" + participants + ", companyParticipants="
+                + companyParticipants + "]";
+    }
+
+    public List<Object> getAllParticipants() {
+        return allParticipants;
+    }
+
+    public void setAllParticipants(List<Object> allParticipants) {
+        this.allParticipants = allParticipants;
     }
 
 }
