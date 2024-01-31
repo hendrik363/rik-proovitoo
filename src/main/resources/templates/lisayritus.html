@@ -40,6 +40,12 @@
                             <input th:field="*{dateTime}" type="datetime-local" class="form-control" id="eventDate" name="date"
                                 required>
                         </div>
+                        <script>
+                            var now = new Date();
+                            now.setSeconds(now.getSeconds() + 1);
+                            var formattedNow = now.toISOString().slice(0, 16);
+                            document.getElementById("eventDate").min = formattedNow;
+                        </script>
                     </div>
 
                     <div class="row mb-3">
@@ -54,7 +60,7 @@
                         <label for="eventDescription" class="col-sm-3 col-form-label">Lisa info:</label>
                         <div class="col-sm-6">
                             <textarea th:field="*{information}" class="form-control" id="eventDescription"
-                                name="description" rows="4" required></textarea>
+                                name="description" rows="4" required maxlength="1500"></textarea>
                         </div>
                     </div>
 

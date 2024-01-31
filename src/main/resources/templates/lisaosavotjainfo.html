@@ -45,7 +45,7 @@
                     <div class="row mb-3">
                         <label for="personalCode" class="col-sm-3 col-form-label">Isikukood:</label>
                         <div class="col-sm-6">
-                            <input th:field="*{personalCode}" type="text" class="form-control" id="personalCode" name="time" required>
+                            <input th:field="*{personalCode}" type="text"  maxlength="12" class="form-control" id="personalCode" name="time" required>
                         </div>
                     </div>
 
@@ -64,7 +64,7 @@
                         <label for="information" class="col-sm-3 col-form-label">Lisainfo:</label>
                         <div class="col-sm-6">
                             <textarea th:field="*{information}" class="form-control" id="information" name="description" rows="4"
-                                required></textarea>
+                                required maxlength="1500"></textarea>
                         </div>
                     </div>
 

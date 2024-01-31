@@ -1,5 +1,7 @@
 package com.hendrikm.controllers;
 
+import java.time.LocalDate;
+
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -29,20 +31,16 @@ public class EventController {
     public String displayAddEventForm(Model model) {
         model.addAttribute("event", new EventModel());
 
-        System.out.println("Test name " + model);
         return "lisayritus";
     }
 
     @PostMapping
     public String addEventForm(@Valid EventModel newEvent, BindingResult bindingResult, Model model) {
 
-        System.out.println("TIME VALUE " + newEvent.getDateTime().toString());
-
         newEvent.setId(null);
 
         service.addOne(newEvent);
 
-        System.out.println("Test name " + model);
         return "redirect:/";
     }
 

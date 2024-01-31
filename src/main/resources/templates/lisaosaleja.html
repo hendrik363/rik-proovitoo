@@ -136,7 +136,7 @@
                             <div class="mb-3 row">
                                 <label for="personalCode" class="col-sm-3 col-form-label">Isikukood:</label>
                                 <div class="col-sm-6">
-                                    <input th:field="*{personalCode}" type="text" class="form-control" id="personalCode"
+                                    <input th:field="*{personalCode}" type="number" maxlength="12" class="form-control" id="personalCode"
                                         required>
                                     <div th:if="${errorMessage}" class="alert alert-danger">
                                         <p th:text="${errorMessage}"></p>
@@ -159,7 +159,7 @@
                                 <label for="participantInfo" class="col-sm-3 col-form-label">Lisainfo</label>
                                 <div class="col-sm-6">
                                     <textarea th:field="*{information}" type="text" class="form-control"
-                                        id="participantInfo" required></textarea>
+                                        id="participantInfo" required maxlength="1500"></textarea>
                                 </div>
                             </div>
 
@@ -186,7 +186,7 @@
                             <div class="mb-3 row">
                                 <label for="registerCode" class="col-sm-3 col-form-label">Registri kood:</label>
                                 <div class="col-sm-6">
-                                    <input th:field="*{registerCode}" type="text" class="form-control" id="registerCode"
+                                    <input th:field="*{registerCode}"  maxlength="12" type="text" class="form-control" id="registerCode"
                                         required>
                                     <div th:if="${errorMessage}" class="alert alert-danger">
                                         <p th:text="${errorMessage}"></p>
@@ -217,7 +217,7 @@
                                 <label for="CompanyInfo" class="col-sm-3 col-form-label">Lisainfo</label>
                                 <div class="col-sm-6">
                                     <textarea th:field="*{information}" type="text" class="form-control"
-                                        id="CompanyInfo" required></textarea>
+                                        id="CompanyInfo" required maxlength="5000"></textarea>
                                 </div>
                             </div>
 
