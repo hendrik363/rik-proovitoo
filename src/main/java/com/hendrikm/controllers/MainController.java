@@ -51,12 +51,8 @@ public class MainController {
             }
         }
 
-
-
         model.addAttribute("comingEvents", comingEvents);
         model.addAttribute("passedEvents", passedEvents);
-        //model.addAttribute("minDate", formattedCurrentDate);
-
 
         return "avaleht";
 

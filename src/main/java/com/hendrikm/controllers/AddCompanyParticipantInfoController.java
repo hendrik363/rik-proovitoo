@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hendrikm.models.CompanyModel;
 import com.hendrikm.models.EventModel;
-import com.hendrikm.models.ParticipantModel;
 import com.hendrikm.services.EventsServiceInterface;
 
 @Controller

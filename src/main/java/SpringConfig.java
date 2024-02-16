@@ -3,11 +3,9 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.web.context.annotation.RequestScope;
 
 import com.hendrikm.data.EventsDataAccessInterface;
-// import com.hendrikm.data.EventsDataService;
 import com.hendrikm.data.EventsDataServiceForRepository;
 import com.hendrikm.services.EventsServiceInterface;
 import com.hendrikm.services.GetEventsService;

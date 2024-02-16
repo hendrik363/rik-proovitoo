@@ -1,7 +1,5 @@
 package com.hendrikm.controllers;
 
-import java.time.LocalDate;
-
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
