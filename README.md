@@ -10,7 +10,12 @@
 ### Run
 java -jar ./target/rik-proovitoo.jar
 
+## Sissejuhatus
+
+Käesolev projekt on mõeldud ürituste lisamiseks/haldamiseks. Projektis on kasutusel Java Spring boot raamistik ning frontendiks on HTML, CSS ja javascript. Projektil on ka töötav API lingil: http://localhost:8080/api/v1/events. Andemed salvestatakse mysql andmebaasi.
+
 ## Prooviülesande nõuded
+
 
 ### Mittefunktsionaalsed nõuded
 · Veebirakendus peab olema realiseeritud Java programmeerimiskeeles uusimat raamistikku kasutades.
