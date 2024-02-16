@@ -78,7 +78,7 @@ Ettevõtte juriidiline nimi
 ## Andmebaas
 
 Mysql andmebaasi seadistasin kastades rakendust MAMP. Seadistasin, ainult ühe tabeli ürituste jaoks. Üritus koosneb järgnevatest väljadest: 
-- ID 
+- ID (Auto Increment) (Andmetüüp Integer) (PRIMARY)
 - NAME (Nimi) (Andmetüüp TEXT)
 - DATETIME (ürituse aeg) (Andmetüüp TEXT)
 - LOCATION (Asukoht) (Andmetüüp TEXT)
