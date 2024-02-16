@@ -77,7 +77,7 @@ Ettevõtte juriidiline nimi
 
 ## Andmebaas
 
-Mysql andmebaasi seadistasin kastades rakendust MAMP. Seadistasin, ainult ühe tabeli ürituste jaoks. Üritus koosneb järgnevatest väljadest: 
+Mysql andmebaasi seadistasin kastades rakendust MAMP. Mysql port on seadistuses 8889 ning apache port on 8888. Seadistasin, ainult ühe tabeli ürituste jaoks(tabel name: events). Üritus koosneb järgnevatest väljadest: 
 - ID (Auto Increment) (Andmetüüp Integer) (PRIMARY)
 - NAME (Nimi) (Andmetüüp TEXT)
 - DATETIME (ürituse aeg) (Andmetüüp TEXT)
